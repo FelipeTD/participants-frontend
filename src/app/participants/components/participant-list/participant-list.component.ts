@@ -11,6 +11,7 @@ export class ParticipantListComponent implements OnInit {
   @Input() participants: Participant[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() remove = new EventEmitter(false);
 
   readonly displayedColumns = ['code', 'externalCode', 'name', 'cpf', 'phone', 'assign', 'status', 'actions'];
 
@@ -18,13 +19,17 @@ export class ParticipantListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ 
   onAdd() {
     this.add.emit(true);
   }
 
   onEdit(participant: Participant) {
     this.edit.emit(participant);
+  }
+
+  onDelete(participant: Participant) {
+    this.remove.emit(participant);
   }
 
 }

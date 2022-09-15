@@ -47,4 +47,8 @@ export class ParticipantsService {
     );
   }
 
+  remove(id: number | null) {
+    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+  }
+
 }
