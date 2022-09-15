@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { Participant } from '../model/participant';
-import { ParticipantsService } from '../services/participants.service';
+import { Participant } from '../../model/participant';
+import { ParticipantsService } from '../../services/participants.service';
 
 @Component({
   selector: 'app-participants',
@@ -14,7 +14,6 @@ import { ParticipantsService } from '../services/participants.service';
 export class ParticipantsComponent implements OnInit {
 
   participants$: Observable<Participant[]>;
-  displayedColumns = ['code', 'externalCode', 'name', 'cpf', 'phone', 'assign', 'status', 'actions'];
 
   // participantService: ParticipantsService;
 
@@ -46,6 +45,10 @@ export class ParticipantsComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  onEdit(participant: Participant) {
+    this.router.navigate(['edit', participant.code], { relativeTo: this.route });
   }
 
 }

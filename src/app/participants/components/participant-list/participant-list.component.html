@@ -1,0 +1,73 @@
+<mat-table [dataSource]="participants">
+    <!-- Code Column -->
+    <ng-container matColumnDef="code">
+        <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+        <mat-cell *matCellDef="let participant"> {{ participant.code }} </mat-cell>
+    </ng-container>
+
+    <!-- ExternalCode Column -->
+    <ng-container matColumnDef="externalCode">
+        <mat-header-cell *matHeaderCellDef> Código Externo </mat-header-cell>
+        <mat-cell *matCellDef="let participant"> {{ participant.externalCode }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let participant"> {{ participant.name }} </mat-cell>
+    </ng-container>
+
+    <!-- CPF Column -->
+    <ng-container matColumnDef="cpf">
+        <mat-header-cell *matHeaderCellDef> CPF/CNPJ </mat-header-cell>
+        <mat-cell *matCellDef="let participant"> {{ participant.cpf }} </mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+        <mat-cell *matCellDef="let participant"> {{ participant.phone }} </mat-cell>
+    </ng-container>
+
+    <!-- Assign Column -->
+    <ng-container matColumnDef="assign">
+        <mat-header-cell *matHeaderCellDef> Assina digital </mat-header-cell>
+        <mat-cell *matCellDef="let participant">
+            <mat-icon aria-hidden="false" aria-label="Assina digitalmente/eletronicamente">
+                {{ participant.assign | status }}
+            </mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let participant">
+            <mat-icon aria-hidden="false" aria-label="Status">
+                {{ participant.status | status }}
+            </mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="action-column-header">
+            <button mat-mini-fab color="accent" aria-label="Adicionar um participante">
+                <mat-icon (click)="onAdd()">add</mat-icon>
+            </button>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let participant" class="action-column">
+            <button mat-icon-button color="primary" aria-label="Editar Participante">
+                <mat-icon (click)="onEdit(participant)">edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" aria-label="Remover Participante">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

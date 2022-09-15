@@ -1,9 +1,9 @@
 export interface Participant {
-    code: number;
-    externalCode: number;
+    code: number | null;
+    externalCode: number | null;
     name: string;
     cpf: string;
-    phone: string;
+    phone: string | null;
     assign: boolean;
     status: boolean; 
 }

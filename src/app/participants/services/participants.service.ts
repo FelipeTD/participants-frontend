@@ -22,7 +22,11 @@ export class ParticipantsService {
     );
   }
 
-  save(record: Participant) {
+  loadById(id: number) {
+    return this.httpClient.get<Participant>(`${this.API}/${id}`);
+  }
+
+  save(record: Partial<Participant>) {
     return this.httpClient.post<Participant>(this.API, record)
     .pipe(
       first()

@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ParticipantsService } from '../services/participants.service';
+import { ParticipantsService } from '../../services/participants.service';
 
 @Component({
   selector: 'app-participant-form',
@@ -11,21 +11,21 @@ import { ParticipantsService } from '../services/participants.service';
 })
 export class ParticipantFormComponent implements OnInit {
 
-  form: UntypedFormGroup;
+  form = this.formBuilder.group({
+    code: new FormControl<number | null>(null),
+    externalCode: new FormControl<number | null>(null),
+    name: new FormControl<string>('', { nonNullable: true }),
+    cpf: new FormControl<string>('', { nonNullable: true }),
+    phone: new FormControl<string>('', { nonNullable: true }),
+    assign: new FormControl<boolean>(false, { nonNullable: true }),
+    status: new FormControl<boolean>(false, { nonNullable: true })
+  });
 
-  constructor(private formBuilder: UntypedFormBuilder, 
+  constructor(private formBuilder: FormBuilder, 
     private service: ParticipantsService, 
     private snackBar: MatSnackBar,
     private location: Location) {
-    this.form = this.formBuilder.group({
-      code: [null],
-      externalCode: [null],
-      name: [null],
-      cpf: [null],
-      phone: [null],
-      assign: [false],
-      status: [false]
-    });
+    this.form
   }
 
   ngOnInit(): void {
