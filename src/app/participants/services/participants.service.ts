@@ -22,12 +22,26 @@ export class ParticipantsService {
     );
   }
 
-  loadById(id: number) {
+  loadById(id: number | null) {
     return this.httpClient.get<Participant>(`${this.API}/${id}`);
   }
 
   save(record: Partial<Participant>) {
+    if (record.code) {
+      return this.update(record);
+    }
+    return this.create(record);
+  }
+
+  private create(record: Partial<Participant>) {
     return this.httpClient.post<Participant>(this.API, record)
+    .pipe(
+      first()
+    );
+  }
+
+  private update(record: Partial<Participant>) {
+    return this.httpClient.put<Participant>(`${this.API}/${record.code}`, record)
     .pipe(
       first()
     );

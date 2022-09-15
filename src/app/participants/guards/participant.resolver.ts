@@ -19,7 +19,7 @@ export class ParticipantResolver implements Resolve<Participant> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Participant> {
     if (route.params && route.params['id']) {
-      this.service.loadById(route.params['id']);
+      return this.service.loadById(route.params['id']);
     }
     
     return of({
