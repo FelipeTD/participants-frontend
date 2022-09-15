@@ -22,4 +22,11 @@ export class ParticipantsService {
     );
   }
 
+  save(record: Participant) {
+    return this.httpClient.post<Participant>(this.API, record)
+    .pipe(
+      first()
+    );
+  }
+
 }
